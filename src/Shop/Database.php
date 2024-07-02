@@ -17,9 +17,7 @@ class Database extends PDO{
         if(!$bindings) {
             return self::query($sql);
         }
-
         $stmt = self::prepare($sql);
-
         $stmt->execute($bindings);
         return $stmt;
     }
