@@ -21,3 +21,5 @@ class Session{
         $_SESSION['role']       = $user['role'];
     }
 }
+
+//TODO Session createn und update func
