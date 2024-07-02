@@ -9,9 +9,9 @@ class Session{
 
     public function __construct(){
         session_start();
-        $this->id = $_SESSION['id'] ?? 0;
+        $this->id       = $_SESSION['id'] ?? 0;
         $this->forename = $_SESSION['forename'] ?? 0;
-        $this->role = $_SESSION['role'] ?? 'guest';
+        $this->role     = $_SESSION['role'] ?? 'guest';
     }
 
     public function createSession(array $user) : void{
