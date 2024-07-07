@@ -14,11 +14,11 @@ class User{
     
     public function fetch(string $id){
         $sql = "SELECT * FROM users WHERE (id = :id)";
-        return $this->db->sql_excecute($sql, ['id' => $id])->fetch();
+        return $this->db->sql_execute($sql, ['id' => $id])->fetch();
     }
     public function fetchAll(): array {
         $sql = 'SELECT * FROM users';
-        return $this->db->sql_excecute($sql)->fetchAll();
+        return $this->db->sql_execute($sql)->fetchAll();
     }
     public function push(array $data){
         $uuid       = guidv4();
@@ -31,7 +31,7 @@ class User{
 
         $sql = "INSERT INTO users(uuid, firstname, lastname, email, password, role, created_at)
                 VALUES (:uuid, :firstname, :lastname, :email, :password, :role, :created_at)";
-        $this->db->sql_excecute($sql,[
+        $this->db->sql_execute($sql,[
             'uuid'          => $uuid,
             'firstname'     => $firstname,
             'lastname'      => $lastname,
@@ -48,7 +48,7 @@ class User{
         $lastname   = $data['lastname'];
         $role       = $data['role'];
         $sql = "UPDATAE users SET firstname = :firstname, lastname = :lastname, role = :role WHERE uuid = :uuid";
-        $this->db->sql_excecute($sql, [
+        $this->db->sql_execute($sql, [
             'firstname' => $firstname,
             'lastname' => $lastname,
             'role' => $role,
@@ -58,6 +58,22 @@ class User{
 
     public function delete(string $uuid){
         $sql = "DELETE FROM users WHERE uuid = :uuid";
-        $this->db->sql_excecute($sql,['uuid' => $uuid]);
+        $this->db->sql_execute($sql,['uuid' => $uuid]);
+    }
+
+    public function login(string $email, string $password): false|array{
+        $sql = "SELECT uuid, firstname, lastname, created_at, email, password, role
+                FROM users
+                WHERE email = :email;";
+        $user = $this->db->sql_execute($sql, ['email' => $email])->fetch();
+        if( !$user){
+            return false;
+        }
+        if(password_verify($password, $user['password'])){
+            return $user;
+        }
+        else{
+            return false;
+        }
     }
 }

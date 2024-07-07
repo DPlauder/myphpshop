@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/style.css">
-    <link rel="stylesheet" href="css/pico.min.css">
+    <link rel="stylesheet" href="../css/pico.min.css">
     <title>My Shop</title>
 </head>
 
@@ -14,7 +14,7 @@
     <header class="container">
         <nav>
             <a href="#">
-                <h1>My Shop</h1>
+                <h1>Adminbereich</h1>
             </a>
 
             <ul>
@@ -31,8 +31,8 @@
                         <?= Renderer::e($_SESSION['firstname']); ?>
                         </summary>
                         <ul dir="rtl">
-                            <li><a href="./admin/admin.php">Adminbereich</a></li>
-                            <li><a href="logout.php">Logout</a></li>
+                            <li><a href="./admin.php">Adminbereich</a></li>
+                            <li><a href="../logout.php">Logout</a></li>
                         </ul>
                     </details>
                 </li>

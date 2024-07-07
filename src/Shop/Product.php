@@ -13,11 +13,17 @@ class Product{
     //TODO add JOINTS
     public function fetchAll(){
         $sql = "SELECT * FROM products";
-        return $this->db->sql_excecute($sql)->fetchAll();
+        return $this->db->sql_execute($sql)->fetchAll();
     }
+
     public function fetchProductByArticlenum(string $article_num){
         $sql = "SELECT * FROM products WHERE 'articlenum = :article_num";
-        return $this->db->sql_excecute($sql, ['article_num' => $article_num])->fetch();
+        return $this->db->sql_execute($sql, ['article_num' => $article_num])->fetch();
+    }
+    
+    public function fetchProductsByUser(string $id): array{
+        $sql = "SELECT * FROM products WHERE creator = :id";
+        return $this->db->sql_execute($sql, ['id' => $id])->fetchAll();
     }
 
 
@@ -31,7 +37,7 @@ class Product{
 
         $sql = "INSERT INTO products (articlenum, title, description, price, category, creator)
                 VALUES (:articlenum, :title, :description, :price, :category, :creator)";
-        $this->db->sql_excecute($sql,[
+        $this->db->sql_execute($sql,[
             'articlenum'    => $articlenum,
             'title'         => $title,
             'description'   => $description ,
@@ -50,7 +56,7 @@ class Product{
         $creator        = $data['creator'];
 
         $sql = "UPDATE products SET (title = :title, description = :description, price = :price, category = :category, creator = :creator) WHERE articlenum = :articlenum";
-        $this->db->sql_excecute($sql, [
+        $this->db->sql_execute($sql, [
             'title'         => $title,
             'description'   => $description,
             'price'         => $price,
@@ -62,6 +68,6 @@ class Product{
 
     public function delete(string $article_num){
         $sql = "DELETE FROM products WHERE articlenum = :article_num";
-        $this->db->sql_excecute($sql,["articlenum" => $article_num]);
+        $this->db->sql_execute($sql,["articlenum" => $article_num]);
     }
 }

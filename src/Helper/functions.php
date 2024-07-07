@@ -19,3 +19,8 @@ function guidv4($data = null) {
 function hashPassword(string $password): false|null|string {
 	return password_hash($password, PASSWORD_ARGON2I);
 }
+function redirect(string $url, array $params = [], $status_code = 302) : void {
+    $query = $params ? '?' . http_build_query($params) : '';
+    header("Location: $url$query", $status_code);
+    exit;
+}

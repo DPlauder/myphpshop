@@ -13,7 +13,7 @@ class Database extends PDO{
         parent::__construct($dsn, $username, $password, array_replace($default, $options ));
     }
 
-    public function sql_excecute($sql, $bindings = []): PDOStatement{
+    public function sql_execute($sql, $bindings = []): PDOStatement{
         if(!$bindings) {
             return self::query($sql);
         }
