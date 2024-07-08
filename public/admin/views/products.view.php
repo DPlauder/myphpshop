@@ -21,7 +21,7 @@
                 <td scope="row"><?= Renderer::e($item['category']) ?></td>
                 <td scope="row">
                     <a href="product.php?articlenum=<?= Renderer::e($item['articlenum']) ?>">Bearbeiten</a>
-                    <a href="product-delete.php">Löschen</a>
+                    <a href="product-delete.php?articlenum=<?= Renderer::e($item['articlenum']) ?>">Löschen</a>
                 </td>             
             </tr>
         <?php endforeach; ?>

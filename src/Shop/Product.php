@@ -17,7 +17,7 @@ class Product{
     }
 
     public function fetchProductByArticlenum(string $articlenum){
-        $sql = "SELECT * FROM products as p JOIN categories as c ON p.category = c.name WHERE articlenum = :articlenum";
+        $sql = "SELECT p.articlenum, p.title, p.description, p.price, p.category, c.name as category FROM products as p JOIN categories as c ON p.category = c.name WHERE articlenum = :articlenum";
         return $this->db->sql_execute($sql, ['articlenum' => $articlenum])->fetch();
     }
     
@@ -67,8 +67,8 @@ class Product{
         ]);
     }
 
-    public function delete(string $article_num){
-        $sql = "DELETE FROM products WHERE articlenum = :article_num";
-        $this->db->sql_execute($sql,["articlenum" => $article_num]);
+    public function delete(string $articlenum){
+        $sql = "DELETE FROM products WHERE articlenum = :articlenum";
+        $this->db->sql_execute($sql,["articlenum" => $articlenum]);
     }
 }

@@ -35,7 +35,7 @@ $data = [
     'creator' => '204b2af9-afce-4150-94eb-2502d1f6957d'
 ];
 $shop->getProduct()->push($data);
-   */
+*/
 
 
 Renderer::render(ROOT_PATH . '/public/views/index.view.php', [

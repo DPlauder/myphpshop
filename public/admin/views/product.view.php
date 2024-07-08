@@ -13,7 +13,7 @@
             <select name="category" id="category">
                 <option>Wähle Kategorie</option>
                 <?php foreach($categories as $category): ?>
-                    <option value="<?= Renderer::e($category['name']) ?>"><?= Renderer::e($category['name']) ?></option>
+                    <option value="<?= Renderer::e($category['name']) ?>"<?= $category['name'] === $product['category'] ? 'selected' : ''; ?>> <?= Renderer::e($category['name']) ?></option>
                 <?php endforeach; ?>
             </select>
             <input type="submit" value="send">
