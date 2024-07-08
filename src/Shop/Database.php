@@ -13,12 +13,25 @@ class Database extends PDO{
         parent::__construct($dsn, $username, $password, array_replace($default, $options ));
     }
 
-    public function sql_execute($sql, $bindings = []): PDOStatement{
-        if(!$bindings) {
-            return self::query($sql);
+    public function sql_execute(string $sql, array $bindings = []):PDOStatement{
+        if(! $bindings){
+            return $this->query($sql);
         }
-        $stmt = self::prepare($sql);
-        $stmt->execute($bindings);
+        $stmt = $this->prepare($sql);
+        
+        foreach($bindings as $key => $value){
+            if(is_int($value)){
+                $stmt->bindValue($key, $value, PDO::PARAM_INT);
+            } else{
+                $stmt->bindValue($key, $value, PDO::PARAM_STR);
+            }
+        }
+        try {
+            $stmt->execute();
+        }catch (\PDOException $e) {
+            echo $e->getMessage();
+            exit;
+        }
         return $stmt;
     }
 

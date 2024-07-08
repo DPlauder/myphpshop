@@ -20,3 +20,8 @@ $navigation = [
         'Kategorien' => ''
     ];
 $session = $shop->getSession();
+
+
+//var_dump($_SESSION);
+//var_dump($shop->getSession());
+

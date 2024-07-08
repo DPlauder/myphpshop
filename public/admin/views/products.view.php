@@ -2,7 +2,7 @@
 
 <main>
     <table>
-        <button><a href="product.php">Neues Produkt erstellen</a></button>
+       <a type="button" href="product.php">Neues Produkt erstellen</a>
     <?php if(!empty($products)): ?>
     <table>
         <thead>
@@ -20,7 +20,7 @@
                 <td scope="row"><?= Renderer::e($item['price']) ?></td>
                 <td scope="row"><?= Renderer::e($item['category']) ?></td>
                 <td scope="row">
-                    <a href="product-update.php">Bearbeiten</a>
+                    <a href="product.php?articlenum=<?= Renderer::e($item['articlenum']) ?>">Bearbeiten</a>
                     <a href="product-delete.php">Löschen</a>
                 </td>             
             </tr>

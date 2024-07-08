@@ -16,9 +16,9 @@ class Product{
         return $this->db->sql_execute($sql)->fetchAll();
     }
 
-    public function fetchProductByArticlenum(string $article_num){
-        $sql = "SELECT * FROM products WHERE 'articlenum = :article_num";
-        return $this->db->sql_execute($sql, ['article_num' => $article_num])->fetch();
+    public function fetchProductByArticlenum(string $articlenum){
+        $sql = "SELECT * FROM products as p JOIN categories as c ON p.category = c.name WHERE articlenum = :articlenum";
+        return $this->db->sql_execute($sql, ['articlenum' => $articlenum])->fetch();
     }
     
     public function fetchProductsByUser(string $id): array{
@@ -48,14 +48,15 @@ class Product{
         return true;
     }
     public function update(array $data){
-        $articlenum     = $data['$articlenum'];
+
+        $articlenum     = $data['articlenum'];
         $title          = $data['title'];
         $description    = $data['description'];
         $price          = $data['price'];
         $category       = $data['category'];
         $creator        = $data['creator'];
 
-        $sql = "UPDATE products SET (title = :title, description = :description, price = :price, category = :category, creator = :creator) WHERE articlenum = :articlenum";
+        $sql = "UPDATE products SET title = :title, description = :description, price = :price, category = :category, creator = :creator WHERE articlenum = :articlenum";
         $this->db->sql_execute($sql, [
             'title'         => $title,
             'description'   => $description,

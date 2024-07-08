@@ -13,7 +13,7 @@ class User{
     }
     
     public function fetch(string $id){
-        $sql = "SELECT * FROM users WHERE (id = :id)";
+        $sql = "SELECT * FROM users WHERE (uuid = :id)";
         return $this->db->sql_execute($sql, ['id' => $id])->fetch();
     }
     public function fetchAll(): array {
