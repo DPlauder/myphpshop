@@ -10,6 +10,7 @@ $output = 'Hier entsteht mein Shop';
 $products = $shop->getProduct()->fetchAll();
 $categories = $shop->getCategory()->fetchAll();
 
+
 /*  $data = [
     'firstname' => 'Max',
     'lastname' => 'Muster',

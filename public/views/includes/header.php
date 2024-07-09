@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="css/pico.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
     <title>My Shop</title>
 </head>
 
@@ -20,7 +20,20 @@
             <ul>
             <?php foreach ($navigation as $linkname => $link) : ?>
                 <li>
-                    <a href="<?= Renderer::e($link) ?>"><?= Renderer::e($linkname) ?></a>
+                    <?php if($linkname === 'Kategorien'): ?>
+                        <details class="dropdown">
+                            <summary>
+                                <?= Renderer::e($linkname); ?>
+                            </summary>
+                            <ul dir="rtl">
+                                <?php foreach($categories as $category): ?>
+                                    <li><a href="./category.php?category=<?=Renderer::e($category['name']) ?>"><?= Renderer::e($category['name'])?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </details>
+                    <?php else: ?>
+                        <a href="<?= Renderer::e($link) ?>"><?= Renderer::e($linkname) ?></a>
+                    <?php endif; ?>
                 </li>            
             <?php endforeach; ?>
             <?php if(isset($_SESSION['id'])) : ?>

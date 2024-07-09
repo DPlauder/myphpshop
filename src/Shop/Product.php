@@ -26,6 +26,11 @@ class Product{
         return $this->db->sql_execute($sql, ['id' => $id])->fetchAll();
     }
 
+    public function fetchProductsByCategory(string $category): array{
+        $sql = 'SELECT * FROM products WHERE category = :category';
+        return $this->db->sql_execute($sql, ['category' => $category])->fetchAll();
+    }
+
 
     public function push(array $data) {
         $articlenum     = guidv4();

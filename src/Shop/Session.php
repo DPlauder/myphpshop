@@ -22,7 +22,6 @@ class Session{
         $_SESSION['firstname']  = $user['firstname'];
         $_SESSION['role']       = $user['role'];
         $_SESSION['cart']       = [];
-
     }
 
     public function updateSession(array $user) : void {

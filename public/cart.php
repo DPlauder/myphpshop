@@ -5,9 +5,9 @@ require dirname(__DIR__) . "/src/bootstrap.php";
 use Dp\Webshop\Helper\Renderer;
 
 Renderer::render(ROOT_PATH . '/public/views/cart.view.php',[
-    'navigation' => $navigation
+    'navigation' => $navigation,
+    'categories' => $categories
 ]);
-
 
 $output = 'Shopping-Cart';
 if(!empty($session->cart)){

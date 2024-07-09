@@ -24,3 +24,6 @@ function redirect(string $url, array $params = [], $status_code = 302) : void {
     header("Location: $url$query", $status_code);
     exit;
 }
+ function combine(array $session_cart, array $db_cart){
+    var_dump($db_cart);
+}

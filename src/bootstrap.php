@@ -11,17 +11,18 @@ use Dp\Webshop\Shop\Shop;
 $shop = new Shop(Config::getDsn(),Config::DB_USER,'');
 $navigation = [
     'Home'          => 'index.php',
-    'Categories'    => '',
+    'Kategorien'    => 'categories.php',
     'Cart'          => 'cart.php'];
 
-    $navigation_admin = [
-        'Home' => '../index.php',
-        'Produkte' => 'products.php',
-        'Kategorien' => ''
-    ];
+$navigation_admin = [
+    'Home' => '../index.php',
+    'Produkte' => 'products.php',
+    'Kategorien' => ''
+];
+$categories = $shop->getCategory()->fetchAll();
 $session = $shop->getSession();
 
 
 //var_dump($_SESSION);
-//var_dump($shop->getSession());
+var_dump($shop->getSession());
 

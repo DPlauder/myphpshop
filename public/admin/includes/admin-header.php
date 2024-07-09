@@ -16,7 +16,6 @@
             <a href="#">
                 <h1>Adminbereich</h1>
             </a>
-
             <ul>
             <?php foreach ($navigation as $linkname => $link) : ?>
                 <li>

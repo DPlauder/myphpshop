@@ -1,6 +1,7 @@
 <?php
 
 require dirname(__DIR__) . "/src/bootstrap.php";
+use function Dp\Webshop\Helper\combine;
 
 use Dp\Webshop\Helper\Renderer;
 use function Dp\Webshop\Helper\redirect;
@@ -11,6 +12,7 @@ $errors = [];
 
 Renderer::render(ROOT_PATH . '/public/views/login.view.php',[
     'navigation' => $navigation,
+    'categories' => $categories,
     "output" => $output
 ]);
 
@@ -31,7 +33,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
         elseif($user){
             $shop->getSession()->createSession($user);
+            $db_cart = $shop->getCartHandler()->fetchByUuid($user['uuid']);
+            if(!empty($session->cart)){
+                combine($session->cart, $db_cart);
+            }
             redirect('index.php', ['uuid' => $user['uuid']]);
+        
         }
         else{
             $errors['login'] = 'Login faileds';
