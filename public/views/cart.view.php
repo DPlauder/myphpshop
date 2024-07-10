@@ -1,7 +1,7 @@
 <?php use Dp\Webshop\Helper\Renderer; ?>
 
 <main>
-    <?php if(!empty($cart)): ?>
+    <?php if(!empty($products)): ?>
     <table>
         <thead>
             <tr>
@@ -12,9 +12,12 @@
             </tr>
         </thead>
         <tbody>
-        <?php foreach($cart as $item): ?>
+        <?php foreach($products as $item): ?>
             <tr>
-                <th scope="row">TEST</th>
+                <th scope="row"><?= Renderer::e($item['title']) ?></th>
+                <td scope="row"><?= Renderer::e($item['price']) ?></td>
+                <td scope="row"><?= Renderer::e($item['anzahl']) ?></td>
+                <td scope="row"><?= Renderer::e($item['gesamtpreis'])?></td>
             </tr>
         <?php endforeach; ?>
 
