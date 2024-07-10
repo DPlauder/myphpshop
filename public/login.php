@@ -1,7 +1,7 @@
 <?php
 
 require dirname(__DIR__) . "/src/bootstrap.php";
-use function Dp\Webshop\Helper\combine;
+use function Dp\Webshop\Helper\categorizeCartEntries;
 
 use Dp\Webshop\Helper\Renderer;
 use function Dp\Webshop\Helper\redirect;
@@ -33,9 +33,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
         elseif($user){
             $shop->getSession()->createSession($user);
-            $db_cart = $shop->getCartHandler()->fetchByUuid($user['uuid']);
             if(!empty($session->cart)){
-                combine($session->cart, $db_cart);
+                $db_cart = $shop->getCart()->fetchAllByUserId($user['uuid']);        
+                $myArrays = categorizeCartEntries($session->cart, $db_cart, $user['uuid']);
+                $updateEntries = $myArrays['doubleEntries'];
+                $newEntries = $myArrays['newEntries'];
+
+                foreach($updateEntries as $item){
+                    $shop->getCart()->update($item);
+                }
+                foreach($newEntries as $item){
+                    $shop->getCart()->push($user['uuid'], $item['articlenum'], $item['anzahl']);
+                }
             }
             redirect('index.php', ['uuid' => $user['uuid']]);
         
@@ -45,11 +54,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     }
     
-/* 
-    Renderer::render(ROOT_PATH . '/public/views/index.view.php',[
-        "navigation" => $navigation,
-        "output" => $output,
-        "user" => $user
-    ]);
-     */
 }

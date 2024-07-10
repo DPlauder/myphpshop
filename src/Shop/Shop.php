@@ -11,7 +11,6 @@ class Shop{
     protected User $user;
     protected Session $session;
     protected Cart $cart;
-    protected CartHandler $cartHandler;
 
     public function __construct(string $dsn, string $user, string $password){
         $this->db = new Database($dsn, $user, $password);
@@ -46,12 +45,6 @@ class Shop{
             $this->cart = new Cart($this->db);
         }
         return $this->cart;
-    }
-    public function getCartHandler(): CartHandler{
-        if(! isset($this->cartHandler)){
-            $this->cartHandler = new CartHandler($this->db);
-        }
-        return $this->cartHandler;
     }
 
     

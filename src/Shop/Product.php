@@ -31,7 +31,6 @@ class Product{
         return $this->db->sql_execute($sql, ['category' => $category])->fetchAll();
     }
 
-
     public function push(array $data) {
         $articlenum     = guidv4();
         $title          = $data['title'];

@@ -24,6 +24,24 @@ function redirect(string $url, array $params = [], $status_code = 302) : void {
     header("Location: $url$query", $status_code);
     exit;
 }
- function combine(array $session_cart, array $db_cart){
-    var_dump($db_cart);
+ function categorizeCartEntries(array $session_cart, array $db_cart, string $user_uuid): array{
+    $doubleEntries = [];
+    $newEntries = [];
+
+    foreach($session_cart as $item_session){
+        $item_session['user_uuid'] = $user_uuid;
+        $is_double = false;
+        foreach($db_cart as $item_cart){
+            if($item_session['articlenum'] === $item_cart['articlenum']){
+                $item_session['anzahl'] += $item_cart['anzahl'];
+                $doubleEntries[] = $item_session;
+                $is_double = true;
+            }
+        }
+        if(! $is_double){
+            $newEntries[] = $item_session;
+        }
+    }
+    return ['doubleEntries' => $doubleEntries, 'newEntries' => $newEntries];
+
 }

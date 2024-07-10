@@ -9,11 +9,16 @@ use function Dp\Webshop\Helper\combine;
 $category = filter_input(INPUT_GET, 'category') ? $_GET['category'] : '' ;
 $articlenum = filter_input(INPUT_GET, 'articlenum') ? $_GET['articlenum'] : '';
 
-$data = ['articlnum' => $articlenum, 'user_uuid' => $session->id, 'anzahl' => 1];
+$data = ['articlenum' => $articlenum, 'user_uuid' => $session->id, 'anzahl' => 1];
 
 if($session->id){
-    
-    //$shop->getCartHandler()->pushToCart($articlenum, $session->id);
+    if($item = $shop->getCart()->fetchCartItem($session->id, $articlenum)){
+        $item['anzahl'] ++;
+        $shop->getCart()->update($item);
+    }
+    else{
+        $shop->getCart()->push($session->id, $articlenum);
+    }
 }
 else{
     if(empty($session->cart)){

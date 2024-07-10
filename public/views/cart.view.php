@@ -14,7 +14,7 @@
         <tbody>
         <?php foreach($cart as $item): ?>
             <tr>
-                <th scope="row"><?= Renderer::e($item) ?>TEST</th>
+                <th scope="row">TEST</th>
             </tr>
         <?php endforeach; ?>
 
