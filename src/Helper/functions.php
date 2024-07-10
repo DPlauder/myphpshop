@@ -24,7 +24,7 @@ function redirect(string $url, array $params = [], $status_code = 302) : void {
     header("Location: $url$query", $status_code);
     exit;
 }
- function categorizeCartEntries(array $session_cart, array $db_cart, string $user_uuid): array{
+ function categorizeCartItems(array $session_cart, array $db_cart, string $user_uuid): array{
     $doubleEntries = [];
     $newEntries = [];
 

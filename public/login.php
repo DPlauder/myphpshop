@@ -1,7 +1,7 @@
 <?php
 
 require dirname(__DIR__) . "/src/bootstrap.php";
-use function Dp\Webshop\Helper\categorizeCartEntries;
+use function Dp\Webshop\Helper\categorizeCartItems;
 
 use Dp\Webshop\Helper\Renderer;
 use function Dp\Webshop\Helper\redirect;
@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $shop->getSession()->createSession($user);
             if(!empty($session->cart)){
                 $db_cart = $shop->getCart()->fetchAllByUserId($user['uuid']);        
-                $myArrays = categorizeCartEntries($session->cart, $db_cart, $user['uuid']);
+                $myArrays = categorizeCartItems($session->cart, $db_cart, $user['uuid']);
                 $updateEntries = $myArrays['doubleEntries'];
                 $newEntries = $myArrays['newEntries'];
 
